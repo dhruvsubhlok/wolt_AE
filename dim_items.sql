@@ -31,12 +31,12 @@ WHEN MATCHED AND (
    )
 )
 THEN
-   INSERT (item_id, brand_name, item_category, price, vat_rate, start_date, end_date, is_active)
-   VALUES (r.ITEM_KEY, r.brand_name, r.item_category, r.price, r.vat_rate, r.start_date, NULL, TRUE)
+   INSERT (item_id, item_name, brand_name, item_category, price, vat_rate, start_date, end_date, is_active)
+   VALUES (r.ITEM_KEY, r.item_name, r.brand_name, r.item_category, r.price, r.vat_rate, r.start_date, NULL, TRUE)
 
 
 -- Step 3: Insert new records if they don't already exist in the target
 WHEN NOT MATCHED BY TARGET
 THEN
-   INSERT (item_id, brand_name, item_category, price, vat_rate, start_date, end_date, is_active)
-   VALUES (r.ITEM_KEY, r.brand_name, r.item_category, r.price, r.vat_rate, r.start_date, NULL, TRUE);
+   INSERT (item_id, item_name, brand_name, item_category, price, vat_rate, start_date, end_date, is_active)
+   VALUES (r.ITEM_KEY, r.item_name, r.brand_name, r.item_category, r.price, r.vat_rate, r.start_date, NULL, TRUE);
