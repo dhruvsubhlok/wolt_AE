@@ -32,4 +32,12 @@ FROM raw_data p
 LEFT JOIN dim_items i ON p.item_id = i.item_id
    and p.order_date between i.start_date and i.end_date
 
-GROUP BY p.order_id, i.item_id, i.item_category;
+GROUP BY p.order_id,
+   p.customer_id,
+   p.order_date,
+   p.delivery_distance,
+   p.wolt_service_fee,
+   p.courier_base_fee,
+   p.total_basket_value,
+   p.item_id,
+   i.item_category
