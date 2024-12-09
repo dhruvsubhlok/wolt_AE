@@ -24,7 +24,7 @@ SELECT
    p.total_basket_value,
    p.item_id,
    i.item_category,
-   SUM(p.quantity * i.price) AS revenue
+   SUM(p.quantity * i.price) AS item_revenue
 
 
 FROM raw_data p
