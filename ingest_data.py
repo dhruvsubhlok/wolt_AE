@@ -48,11 +48,12 @@ data_items = data_items.withColumn("parsed_payload", from_json(col("PAYLOAD"), p
 
 # Extract required fields
 raw_items = data_items.withColumn("brand_name", col("parsed_payload.brand_name")) \
-.withColumn("item_category", col("parsed_payload.item_category")) \
-.withColumn("product_base_price", col("parsed_payload.price_attributes")[0]["product_base_price"]) \
-.withColumn("vat_rate", col("parsed_payload.price_attributes")[0]["vat_rate_in_percent"]) \
-.withColumn("weight_in_grams", col("parsed_payload.weight_in_grams")) \
-          .drop("PAYLOAD", "parsed_payload")
+           .withColumn("item_name", expr("filter(parsed_payload.name, x -> x.lang = 'en')[0].value")) \
+           .withColumn("item_category", col("parsed_payload.item_category")) \
+           .withColumn("product_base_price", col("parsed_payload.price_attributes")[0]["product_base_price"]) \
+           .withColumn("vat_rate", col("parsed_payload.price_attributes")[0]["vat_rate_in_percent"]) \
+           .withColumn("weight_in_grams", col("parsed_payload.weight_in_grams")) \
+           .drop("PAYLOAD", "parsed_payload")
 
 
 
